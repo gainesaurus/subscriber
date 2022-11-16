@@ -1,0 +1,23 @@
+{
+  "name": "Subscriber Organizer",
+  "short_name": "subscriber",
+  "icons": [
+    {
+      "src": "icon1058x1058.png",
+      "type": "image/png",
+      "sizes": "1058x1058"
+    },
+    {
+      "src": "icon1620x1064.png",
+      "type": "image/png",
+      "sizes": "1620x1064",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "./",
+  "scope": ".",
+  "display": "standalone",
+  "theme_color": "#137DC5",
+  "background_color": "#d5e1f8",
+  "orientation": "portrait"
+}

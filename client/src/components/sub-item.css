@@ -1,0 +1,58 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.item-cont {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  position: relative;
+  height: 20vh;
+  max-height: 55px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, .9);
+  box-shadow: 0px 2px 5px 2px #fcbebe;
+  border-radius: 5px;
+}
+.icon-window {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  /* border: 2px solid #fcbebe; */
+  overflow: hidden;
+  margin-left: 10px;
+}
+.sub-item-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.sub-item-title{
+  padding-left: 15px;
+  color: rgb(57, 57, 57);
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.sub-info {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: absolute;
+  right: 50px;
+  color: rgb(57, 57, 57);
+  font-weight: 200;
+  font-size: 18px;
+}
+
+a:visited {
+  color: inherit;
+}
+a:link {
+  text-decoration: none;
+}
+a:hover .item-cont {
+  box-shadow: 0px 3px 10px 4px #fcbebe;
+}

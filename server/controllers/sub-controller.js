@@ -2,7 +2,7 @@ import db from '../models/sub-model.js';
 
 export async function getAllSubs(req, res) {
   try {
-    const subscriptions = await db.find().sort({reminderDate: -1});
+    const subscriptions = await db.find().sort({ reminderDate: -1 });
     res.send(subscriptions);
     res.status(200);
 
@@ -24,8 +24,8 @@ export async function postOneSub(req, res) {
       cycle: sub.cycle,
       reminderDate: sub.reminderDate,
     });
-    res.send(createdSub);
     res.status(201);
+    res.send(createdSub);
 
   } catch (err) {
     console.log('ERROR in SUB controller POST from db', err);
@@ -38,7 +38,7 @@ export async function editSub(req, res) {
     const updates = req.body;
     console.log(req.body);
 
-    const query = {_id: updates.id};
+    const query = { _id: updates.id };
     const updatedSub = await db.findOneAndUpdate(query, {
       icon: updates.icon,
       price: updates.price,
@@ -47,9 +47,9 @@ export async function editSub(req, res) {
       prettyStart: updates.prettyStart,
       cycle: updates.cycle,
       reminderDate: updates.reminderDate,
-    }, {new: true})
-    res.send(updatedSub);
+    }, { new: true })
     res.status(201);
+    res.send(updatedSub);
 
   } catch (err) {
     console.log('ERROR in SUB controller PUT from db', err);
@@ -60,7 +60,7 @@ export async function editSub(req, res) {
 export async function deleteSub(req, res) {
   try {
     const subId = req.body.id;
-    await db.findOneAndDelete({_id: subId});
+    await db.findOneAndDelete({ _id: subId });
     res.sendStatus(202);
 
   } catch (err) {

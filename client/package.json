@@ -16,7 +16,6 @@
     "@types/react-dom": "^18.0.9",
     "cra-append-sw": "^2.7.0",
     "dotenv": "^16.0.3",
-    "luxon": "^3.1.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-datalist-input": "^3.1.0",

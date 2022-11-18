@@ -20,7 +20,7 @@ function App() {
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState({ title: '', body: '' });
 
-  onMessageListener().then(payload => {
+  onMessageListener().then((payload: any) => {
     setShow(true);
     console.log('Received foreground message ', payload);
     setNotification({ title: payload.data.title, body: payload.data.body });

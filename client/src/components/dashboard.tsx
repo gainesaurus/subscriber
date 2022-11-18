@@ -4,7 +4,7 @@ import Home from './home';
 import AddSubForm from './add-sub-form';
 import EditSubItem from './edit-sub-form';
 
-
+// MOVE TO APP LEVEL
 function Dashboard({ postNewSub, editSub, deleteSub, subscriptions }) {
 
   return (<>

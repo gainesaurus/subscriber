@@ -1,52 +1,35 @@
+import './add-sub-form.css';
+import React, { useState } from 'react';
+import { Link, useNavigate} from 'react-router-dom';
+import ApiService from '../api-service/api-service'
 
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom'
-import ApiService from '../api-service/api-service';
-
+import 'react-datalist-input/dist/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import {Subscription} from '../types'
 
-function EditSubItem({ subscriptions, editSub, deleteSub }) {
-  ///this whole component should be shared with add sub form - most was copy pasted for time
-  const { id } = useParams();
-  const [currentSub, setCurrentSub] = useState({});
+type Props = {
+  postNewSub:(formData:Subscription) => void
+}
 
+function AddSubForm({ postNewSub }:Props) {
   const [imageFile, setImageFile] = useState('');
-  const [binaryFile, setBinaryFile] = useState('');
-  const [price, setPrice] = useState(0);
-  const [title, setTitle] = useState('');
+  const [binaryFile, setBinaryFile] = useState('./add-image-icon.png');
+
+  const [price, setPrice] = useState(0.00);
+  const [title, setTitle] = useState('Title here');
   const [start, setStart] = useState('');
-  const [cycle, setCycle] = useState('');
+  const [cycle, setCycle] = useState('Choose Cycle');
   const [reminderDate, setReminderDate] = useState('');
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    getCurrentSub();
-  }, []);
-
-  const getCurrentSub = async () => {
-    if (subscriptions.length) {
-      console.log(subscriptions);
-      const sub = subscriptions.filter((subItem) => subItem._id === id)[0];
-
-      const startDate = sub.start.slice(0, 10);
-      setStart(startDate)
-      const reminder = sub.reminderDate.slice(0, 16);
-      setReminderDate(reminder)
-
-      //console.log(sub.reminderDate);
-
-      setCurrentSub(sub)
-      setBinaryFile(sub.icon)
-      setTitle(sub.title)
-      setPrice(sub.price)
-      setCycle(sub.cycle)
-    }
-  }
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+
+    // IMPORT AND USE MOMENT TO REPLACE DATE FUNCTIONS
+    // ALL DATES ARE STORED IN ISO FORMAT ON DB
+    // new Date().toISOString()
     const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
     let dateTime = new Date( start );
     let year = dateTime.getFullYear()
@@ -57,7 +40,7 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
 
     const dateToBeReminded = await convertTimeZone();
     const imgData = await uploadImage();
-    editSub({
+    postNewSub({
       'icon': imgData.url,
       'price': price,
       'title': title,
@@ -65,11 +48,11 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
       'prettyStart': prettyStart,
       'cycle': cycle,
       'reminderDate': dateToBeReminded,
-      'id': currentSub._id,
     });
 
     if(reminderDate) {
       const delay = await convertReminderToSeconds();
+      console.log(delay);
       ApiService.postSubNotification({
         'userId': 1234, //for testing purposes
         'title': title,
@@ -77,11 +60,11 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
         'delay': delay,
       })
     }
-    navigate('/');
-  }
-
-  const handleDelete = () => {
-    deleteSub(id);
+    setPrice(0);
+    setTitle('');
+    setStart('');
+    setBinaryFile(null);
+    //go back to home
     navigate('/');
   }
 
@@ -98,20 +81,23 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
     imgData = await imgData.json();
     return imgData;
   }
+  const convertReminderToSeconds = async () => {
+    //reminder date milliseconds
+    const date = new Date(reminderDate);
+    const  reminderMillis = date.getTime();
+    //now milliseconds
+    const now = Date.now();
+    //time until reminder in seconds
+    const delay = reminderMillis - now;
+    return delay;
+  }
 
   const convertTimeZone = async () => {
     let timeZoneOffSet = (new Date()).getTimezoneOffset() * 60000; //off set in milliseconds
-    let convertedDate = reminderDate - timeZoneOffSet;
-    console.log(convertedDate, timeZoneOffSet);
+    let date = new Date(reminderDate);
+    let convertedDate = date.getTime() - timeZoneOffSet;
+    convertedDate = new Date(convertedDate);
     return convertedDate;
-  }
-
-  const convertReminderToSeconds = async () => {
-    const date = new Date(reminderDate);
-    const  reminderMillis = date.getTime();
-    const now = Date.now();
-    const delay = reminderMillis - now;
-    return delay;
   }
 
   function getDate() {
@@ -123,9 +109,9 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
   let date = getDate();
 
   return (<>
-
-    <div className='form-cont'>
+  <div className='form-cont'>
     <form onSubmit={handleSubmit}>
+
       <section className='add-sub-header'>
           <input
             type='file'
@@ -142,7 +128,7 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
             <img className='icon' src={binaryFile} alt='Add Icon'/>
           </div>
 
-          <label className='form-input-label'>$</label>
+          <label className='form-input-label'>$</label>{/*want to make this currency option*/}
           <input className='form-input-box'
             type='number'
             value={price}
@@ -150,6 +136,7 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
             onClick={()=>setPrice('')}
           ></input>
           <Link to='/'><FontAwesomeIcon icon={faChevronLeft} className='back-btn' /></Link>
+
       </section>
 
       {/* FORM BODY */}
@@ -168,6 +155,7 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
           <label className='form-input-label'>First Payment: </label>
             <input className='form-input-box'
               type='date'
+              max={date}
               value={start}
               onChange={(e)=>setStart(e.target.value)}
             ></input>
@@ -195,20 +183,22 @@ function EditSubItem({ subscriptions, editSub, deleteSub }) {
               type='datetime-local'
               value={reminderDate}
               min={date}
-              onChange={(e)=>setReminderDate(e.target.value)}
+              onChange={(e)=>{
+              setReminderDate(e.target.value)
+              console.log(reminderDate)
+              }}
             ></input>
         </section>
-        <section>
-          <button className='submit-form-btn' type='button' onClick={()=>handleDelete()}>Delete Subscription</button>
-          <button className='submit-form-btn' type='submit' >Edit Subscription</button>
-        </section>
+        <button className='submit-form-btn' type="submit">Add Subscription</button>
+
       </div>
+
+
     </form>
   </div>
-
 
 
 </>);
 }
 
-export default EditSubItem;
+export default AddSubForm;

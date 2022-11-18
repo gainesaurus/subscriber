@@ -1,7 +1,10 @@
 import './sub-item.css';
 import { Link } from 'react-router-dom';
+import { Subscription } from '../types';
+import React from 'react';
 
-function SubItem({ subscription }) {
+
+function SubItem({ subscription }:{subscription:Subscription}) {
 
   return (<>
   <Link to={`/edit-sub/${subscription._id}`}>

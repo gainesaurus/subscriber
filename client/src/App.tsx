@@ -1,11 +1,11 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { getMessageToken, onMessageListener } from './firebase';
 
 import { Toast } from 'react-bootstrap';
 
-import ApiService from './api-service/api-service'
+import ApiService from './api-service/api-service';
 import Dashboard from './components/dashboard';
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
     getAllSubs()
   }, []);
 
+  // DELETE
   async function postOrEditToken(userId) {
     //generate client token.
     const clientToken = await getMessageToken();
@@ -60,6 +61,7 @@ function App() {
     })
     setSubs([...filteredSubs]);
   }
+
 
   return (<>
     <Toast className='toast-notify' onClose={()=> setShow(false)}

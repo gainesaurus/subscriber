@@ -41,8 +41,6 @@ function EditSubItem({ subscriptions, editSub, deleteSub }:Props) {
       const reminder = sub.reminderDate.slice(0, 16);
       setReminderDate(reminder)
 
-      //console.log(sub.reminderDate);
-
       setCurrentSub(sub)
       setBinaryFile(sub.icon)
       setTitle(sub.title)
@@ -51,17 +49,18 @@ function EditSubItem({ subscriptions, editSub, deleteSub }:Props) {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault()
 
     // IMPORT MOMENT AND REFACTOR
-    const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    // const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
     let dateTime = new Date( start );
-    let year = dateTime.getFullYear()
-    let month = months[dateTime.getMonth()];
-    let day = dateTime.getDate()
-    if (day < 10) day = '0'+ day;
-    const prettyStart = `${month} ${day}, ${year}`;
+    // let year = dateTime.getFullYear()
+    // let month = months[dateTime.getMonth()];
+    // let day = dateTime.getDate()
+    // if (day < 10) day = '0'+ day;
+    // const prettyStart = `${month} ${day}, ${year}`;
+    const prettyStart = dateTime.toDateString();
 
     const dateToBeReminded = await convertTimeZone();
     const imgData = await uploadImage();
@@ -72,8 +71,8 @@ function EditSubItem({ subscriptions, editSub, deleteSub }:Props) {
       'start': start,
       'prettyStart': prettyStart,
       'cycle': cycle,
-      'reminderDate': dateToBeReminded,
-      'id': currentSub._id,
+      'reminderDate': new Date(dateToBeReminded).toISOString(),
+      '_id': currentSub!._id,
     });
 
     if(reminderDate) {
@@ -89,11 +88,11 @@ function EditSubItem({ subscriptions, editSub, deleteSub }:Props) {
   }
 
   const handleDelete = () => {
-    if (id) deleteSub({id});
+    if (id) deleteSub(id);
     navigate('/');
   }
 
-  const imageUploader = React.useRef(null);
+  const imageUploader = React.useRef<HTMLInputElement>(null);
   const uploadImage = async () => {
     const data = new FormData()
     data.append('file', imageFile)
@@ -109,8 +108,7 @@ function EditSubItem({ subscriptions, editSub, deleteSub }:Props) {
 
   const convertTimeZone = async () => {
     let timeZoneOffSet = (new Date()).getTimezoneOffset() * 60000; //off set in milliseconds
-    let convertedDate = reminderDate - timeZoneOffSet;
-    console.log(convertedDate, timeZoneOffSet);
+    let convertedDate = new Date(reminderDate).getTime() - timeZoneOffSet;
     return convertedDate;
   }
 
@@ -140,13 +138,13 @@ function EditSubItem({ subscriptions, editSub, deleteSub }:Props) {
             accept='image/*'
             multiple={false}
             onChange={(e) => {
-              setBinaryFile(URL.createObjectURL(e.target.files[0]));
-              setImageFile(e.target.files[0]);
+              setBinaryFile(URL.createObjectURL(e.target.files![0]));
+              setImageFile(e.target.files![0].name);
             }}
             ref={imageUploader}
             style={{display:'none'}}
           ></input>
-          <div className='icon-display' onClick={()=> imageUploader.current.click()}>
+          <div className='icon-display' onClick={()=>{if (imageUploader.current) {imageUploader.current.click()}}}>
             <img className='icon' src={binaryFile} alt='Add Icon'/>
           </div>
 
@@ -154,8 +152,7 @@ function EditSubItem({ subscriptions, editSub, deleteSub }:Props) {
           <input className='form-input-box'
             type='number'
             value={price}
-            onChange={(e)=>setPrice(e.target.value)}
-            onClick={()=>setPrice('')}
+            onChange={(e)=>setPrice(parseInt(e.target.value))}
           ></input>
           <Link to='/'><FontAwesomeIcon icon={faChevronLeft} className='back-btn' /></Link>
       </section>

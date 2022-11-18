@@ -15,3 +15,10 @@ export type Notification = {
   price: number;
   delay: number;
 }
+
+export type MessageFirebase = {
+  data:{
+    title:string;
+    body:string
+  }
+}

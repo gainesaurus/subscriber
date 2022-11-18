@@ -3,13 +3,13 @@ import './sub-form.css';
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Subscription } from '../types';
+import { Notification, Subscription } from '../types';
 import { postSubNotification, deleteSub } from '../api-service/api-service';
 import SubFormItem from './sub-form-item';
 
 type Props = {
   apiServiceMethod: (formData: Subscription) => void;
-  subscription: Subscription
+  subscription?: Subscription
 }
 
 function SubForm({ apiServiceMethod, subscription }: Props) {
@@ -94,23 +94,24 @@ function SubForm({ apiServiceMethod, subscription }: Props) {
       prettyStart,
       cycle,
       reminderDate: new Date(dateToBeReminded).toISOString(),
-      _id: subscription._id,
+      _id: subscription?._id,
     });
 
     if (reminderDate) {
       const delay = await convertReminderToSeconds();
-      postSubNotification({
+      const notification: Notification = {
         userId: '1234', //for testing purposes
         title: title,
         price: price,
         delay: delay,
-      })
+      }
+      postSubNotification(notification)
     }
     navigate('/');
   }
 
   const handleDelete = () => {
-    if (subscription._id) deleteSub(subscription._id);
+    if (subscription?._id) deleteSub(subscription._id.toString());
     navigate('/');
   }
 

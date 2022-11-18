@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { Subscription } from '../types';
 import React from 'react';
 
-function Home({ subscriptions }: { subscriptions: Array<Subscription> }) {
+function Home({ subscriptions }: { subscriptions?: Array<Subscription> }) {
 
   const getMonthlyAverageCost = () => {
-    return subscriptions.map((sub) =>
+    return subscriptions?.map((sub) =>
       sub.cycle === 'Annually' ?
         Number(sub.price) / 12
         : Number(sub.price)
@@ -22,7 +22,7 @@ function Home({ subscriptions }: { subscriptions: Array<Subscription> }) {
         <footer>
           <div className='header-notice'>
             <h2 className='header-cont-title'>My monthly average subscription expenses are:</h2>
-            <h2 className='header-cont-price'>${count.toFixed(2)}</h2>
+            <h2 className='header-cont-price'>${count?.toFixed(2)}</h2>
           </div>
         </footer>
       }

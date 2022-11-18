@@ -1,7 +1,5 @@
 import { Subscription } from "../types";
 
-const ApiService = {};
-
 const brandToken = process.env.REACT_APP_BRAND_API_TOKEN;
 const baseApiURL = process.env.REACT_APP_BRAND_API_BASE_URL;
 const baseURL = process.env.REACT_APP_BASE_URL;
@@ -65,7 +63,7 @@ const putToken = async (token:string, uid:string) => {
   })
 }
 
-const getSubOptions = async (domain) => {
+const getSubOptions = async (domain:string) => {
   let res = await fetch(`${baseApiURL}${domain}`, {
     method: 'GET',
     headers: {
@@ -75,7 +73,7 @@ const getSubOptions = async (domain) => {
   return await res.json();
 }
 
-export {
+const ApiService = {
   getAllSubs,
   postNewSub,
   editSub,
@@ -84,3 +82,5 @@ export {
   putToken,
   getSubOptions,
 };
+
+export default  ApiService

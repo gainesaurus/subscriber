@@ -30,13 +30,14 @@ function AddSubForm({ postNewSub }:Props) {
     // IMPORT AND USE MOMENT TO REPLACE DATE FUNCTIONS
     // ALL DATES ARE STORED IN ISO FORMAT ON DB
     // new Date().toISOString()
-    const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    // const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
     let dateTime = new Date( start );
-    let year = dateTime.getFullYear()
-    let month = months[dateTime.getMonth()];
-    let day = dateTime.getDate()
-    if (day < 10) day = '0'+ day;
-    const prettyStart = `${month} ${day}, ${year}`;
+    // let year = dateTime.getFullYear()
+    // let month = months[dateTime.getMonth()];
+    // let day = dateTime.getDate()
+    // if (day < 10) day = '0'+ day;
+    // const prettyStart = `${month} ${day}, ${year}`;
+    const prettyStart = dateTime.toDateString();
 
     const dateToBeReminded = await convertTimeZone();
     const imgData = await uploadImage();
@@ -47,7 +48,7 @@ function AddSubForm({ postNewSub }:Props) {
       'start': start,
       'prettyStart': prettyStart,
       'cycle': cycle,
-      'reminderDate': dateToBeReminded,
+      'reminderDate': dateToBeReminded.toISOString(),
     });
 
     if(reminderDate) {
@@ -63,12 +64,12 @@ function AddSubForm({ postNewSub }:Props) {
     setPrice(0);
     setTitle('');
     setStart('');
-    setBinaryFile(null);
+    setBinaryFile('');
     //go back to home
     navigate('/');
   }
 
-  const imageUploader = React.useRef(null);
+  const imageUploader = React.useRef<HTMLInputElement>(null);
   const uploadImage = async () => {
     const data = new FormData()
     data.append('file', imageFile)
@@ -96,8 +97,8 @@ function AddSubForm({ postNewSub }:Props) {
     let timeZoneOffSet = (new Date()).getTimezoneOffset() * 60000; //off set in milliseconds
     let date = new Date(reminderDate);
     let convertedDate = date.getTime() - timeZoneOffSet;
-    convertedDate = new Date(convertedDate);
-    return convertedDate;
+    return new Date(convertedDate);
+    // return convertedDate;
   }
 
   function getDate() {
@@ -117,23 +118,25 @@ function AddSubForm({ postNewSub }:Props) {
             type='file'
             accept='image/*'
             multiple={false}
-            onChange={(e) => {
-              setBinaryFile(URL.createObjectURL(e.target.files[0]));
-              setImageFile(e.target.files[0]);
+            onChange={(e) => {if (e.target.files) {
+              setBinaryFile(URL.createObjectURL(e.target.files![0]));
+              setImageFile(e.target.files[0].name);
+            }
             }}
             ref={imageUploader}
             style={{display:'none'}}
           ></input>
-          <div className='icon-display' onClick={()=> imageUploader.current.click()}>
+          <div className='icon-display' onClick={()=> {if (imageUploader.current) {imageUploader.current.click()}}}
+          >
             <img className='icon' src={binaryFile} alt='Add Icon'/>
           </div>
 
           <label className='form-input-label'>$</label>{/*want to make this currency option*/}
           <input className='form-input-box'
+            required
             type='number'
             value={price}
-            onChange={(e)=>setPrice(e.target.value)}
-            onClick={()=>setPrice('')}
+            onChange={(e)=>setPrice(parseInt(e.target.value))}
           ></input>
           <Link to='/'><FontAwesomeIcon icon={faChevronLeft} className='back-btn' /></Link>
 
@@ -174,7 +177,6 @@ function AddSubForm({ postNewSub }:Props) {
               <option value='Monthly'/>
               <option value='Annually'/>
             </datalist>
-
         </section>
 
         <section className='form-input'>
@@ -185,7 +187,6 @@ function AddSubForm({ postNewSub }:Props) {
               min={date}
               onChange={(e)=>{
               setReminderDate(e.target.value)
-              console.log(reminderDate)
               }}
             ></input>
         </section>

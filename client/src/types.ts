@@ -8,3 +8,10 @@ export type Subscription = {
   cycle: string;
   reminderDate: string;
 }
+
+export type Notification = {
+  userId: string;
+  title: string;
+  price: number;
+  delay: number;
+}

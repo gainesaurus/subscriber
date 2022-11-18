@@ -1,17 +1,19 @@
+import { Subscription } from "../types";
+
 const ApiService = {};
 
 const brandToken = process.env.REACT_APP_BRAND_API_TOKEN;
 const baseApiURL = process.env.REACT_APP_BRAND_API_BASE_URL;
 const baseURL = process.env.REACT_APP_BASE_URL;
 
-ApiService.getAllSubs = async () => {
+const getAllSubs = async () => {
  let res = await fetch(`${baseURL}/subscriptions`);
  res = await res.json();
  return res;
 }
 
 
-ApiService.postNewSub = async (subscription) => {
+const postNewSub = async (subscription:Subscription) => {
   let res = await fetch(`${baseURL}/subscriptions`, {
     method: 'POST',
     body: JSON.stringify(subscription),
@@ -19,11 +21,10 @@ ApiService.postNewSub = async (subscription) => {
       'Content-Type': 'application/json; charset=UTF-8',
     }
   })
-  res = res.json();
-  return res;
+  return await res.json();
 }
 
-ApiService.editSub = async (updatedSub) => {
+const editSub = async (updatedSub:Subscription) => {
   let res = await fetch(`${baseURL}/subscriptions`, {
     method: 'PUT',
     body: JSON.stringify(updatedSub),
@@ -31,11 +32,10 @@ ApiService.editSub = async (updatedSub) => {
       'Content-Type': 'application/json; charset=UTF-8',
     }
   })
-  res = res.json();
-  return res;
+  return await res.json();
 }
 
-ApiService.deleteSub = async (uid) => {
+const deleteSub = async (uid:string) => {
     await fetch(`${baseURL}/subscriptions`, {
     method: 'DELETE',
     body: JSON.stringify({id: uid}),
@@ -45,7 +45,7 @@ ApiService.deleteSub = async (uid) => {
   })
 }
 
-ApiService.postSubNotification = async (notificationData) => {
+const postSubNotification = async (notificationData:Notification) => {
   await fetch(`${baseURL}/notify`, {
     method: 'POST',
     body: JSON.stringify(notificationData),
@@ -55,7 +55,7 @@ ApiService.postSubNotification = async (notificationData) => {
   })
 }
 
-ApiService.putToken = async (token, uid) => {
+const putToken = async (token:string, uid:string) => {
   await fetch(`${baseURL}/user-token`, {
     method: 'PUT',
     body: JSON.stringify({token: token, userId: uid}),
@@ -65,15 +65,22 @@ ApiService.putToken = async (token, uid) => {
   })
 }
 
-ApiService.getSubOptions = async (domain) => {
+const getSubOptions = async (domain) => {
   let res = await fetch(`${baseApiURL}${domain}`, {
     method: 'GET',
     headers: {
       'Authorization': 'Bearer' + brandToken,
     }
   });
-  res = await res.json();
-  return res;
+  return await res.json();
 }
 
-export default ApiService;
+export {
+  getAllSubs,
+  postNewSub,
+  editSub,
+  deleteSub,
+  postSubNotification,
+  putToken,
+  getSubOptions,
+};

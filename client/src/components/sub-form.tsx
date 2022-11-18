@@ -132,13 +132,12 @@ function SubForm({ apiServiceMethod, subscription }: Props) {
           <div className='icon-display' onClick={() => { if (imageUploader.current) { imageUploader.current.click() } }}>
             <img className='icon' src={imageURL} alt='Add Icon' />
           </div>
-
-          <label className='form-input-label'>$</label>
-          <input className='form-input-box'
-            type='number'
-            value={price}
+          <SubFormItem
+            label='$'
+            data={price}
             onChange={(e) => setPrice(parseInt(e.target.value))}
-          ></input>
+            type='number'
+            hasSection={false} />
           <Link to='/'><FontAwesomeIcon icon={faChevronLeft} className='back-btn' /></Link>
         </section>
 

@@ -17,34 +17,34 @@ function Login() {
       <p>loading ...</p>
       return;
     }
-    if (user) navigate("/home");
+    if (user) navigate("/");
   }, [user, loading]);
 
 
   return (
     <div className="login">
-      <div className="login__container">
+      <div className="login-container">
         <input
           type="text"
-          className="login__textBox"
+          className="login-textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
         <input
           type="password"
-          className="login__textBox"
+          className="login-textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
         <button
-          className="login__btn"
+          className="login-btn"
           onClick={() => signInWithEmailAndPassword(auth, email, password)}
         >
           Login
         </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
+        <button className="login-btn login-google" onClick={signInWithGoogle}>
           Login with Google
         </button>
         <div>

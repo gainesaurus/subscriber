@@ -13,7 +13,9 @@ import AddSubForm from './components/add-sub-form';
 import EditSubItem from './components/edit-sub-form';
 import { Subscription } from './types';
 
+
 function App() {
+  console.log(process.env.REACT_APP_FIREBASE_API_KEY)
 
   const [subscriptions, setSubs] = useState<Array<Subscription> | undefined>();
 

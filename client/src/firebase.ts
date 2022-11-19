@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import * as dotenv from 'dotenv';
+// import * as dotenv from 'dotenv';
 import { initializeApp } from 'firebase/app';
 import {
   GoogleAuthProvider,
@@ -19,7 +19,7 @@ import {
 } from 'firebase/firestore';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-dotenv.config();
+// dotenv.config();
 
 // Firebase configuration
 const firebaseConfig = {

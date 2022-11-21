@@ -17,6 +17,10 @@
   },
   "devDependencies": {
     "eslint": "^8.27.0",
-    "eslint-plugin-react": "^7.31.10"
+    "eslint-plugin-react": "^7.31.10",
+    "react-error-overlay": "^6.0.9"
+  },
+  "overrides": {
+    "react-error-overlay": "6.0.9"
   }
 }

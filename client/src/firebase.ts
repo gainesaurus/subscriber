@@ -1,5 +1,4 @@
 // Import the functions you need from the SDKs you need
-// import * as dotenv from 'dotenv';
 import { initializeApp } from 'firebase/app';
 import {
   GoogleAuthProvider,
@@ -19,8 +18,6 @@ import {
 } from 'firebase/firestore';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-// dotenv.config();
-
 // Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -31,7 +28,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
-
+console.log(process.env.REACT_APP_FIREBASE_PROJECT_ID)
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 const auth = getAuth(firebase);

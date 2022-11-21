@@ -1,7 +1,7 @@
 import db from '../models/notify-model.js';
 import tokenDb from '../models/user-token-model.js';
 import { sendReminderToClient } from '../notify.js';
-// //takes token and data object as params.
+// takes token and data object as params.
 
 export async function postSubNotification(req, res) {
   try {

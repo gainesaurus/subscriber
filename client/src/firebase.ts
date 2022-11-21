@@ -1,5 +1,21 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+import {
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+} from 'firebase/firestore';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 // Firebase configuration
@@ -12,16 +28,64 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
-
+console.log(process.env.REACT_APP_FIREBASE_PROJECT_ID)
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
+const auth = getAuth(firebase);
+const db = getFirestore(firebase);
+const googleProvider = new GoogleAuthProvider();
 const messaging = getMessaging(firebase);
+
+const signInWithGoogle = async () => {
+  try {
+    const res = await signInWithPopup(auth, googleProvider);
+    const user = res.user;
+    const q = query(collection(db, 'users'), where('uid', '==', user.uid));
+    const docs = await getDocs(q);
+    if (docs.docs.length ===0) {
+      await addDoc(collection(db, 'users'), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: 'google',
+        email: user.email,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const logInWithEmailAndPassword = async (email:string, password:string) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const registerWithEmailAndPassword = async (name:string, email:string, password:string) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth,email,password);
+    const user = res.user;
+    await addDoc(collection(db, 'users'), {
+      uid: user.uid,
+      name,
+      authProvider: 'local',
+      email,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const logout = () => {
+  signOut(auth);
+};
 
 
 export const getMessageToken = async () => {
   if ('serviceWorker' in navigator) {
     let registration = await navigator.serviceWorker.register('./sw.js');
-    //registration = await registration.pushManager.getSubscription();
 
     const token = await getToken(messaging, {
       serviceWorkerRegistration: registration,
@@ -45,4 +109,12 @@ export const onMessageListener = () =>
     });
 });
 
-export default firebase;
+export {
+  auth,
+  db,
+  signInWithGoogle,
+  signInWithEmailAndPassword,
+  logInWithEmailAndPassword,
+  registerWithEmailAndPassword,
+  logout,
+};;

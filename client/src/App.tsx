@@ -1,22 +1,25 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { onMessageListener } from './firebase';
+import { auth } from "./firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Toast } from 'react-bootstrap';
 
 import { getAllSubs } from './api-service/api-service';
 import { Routes, Route } from 'react-router-dom';
 
+import Login from './components/Login';
 import Home from './components/home';
 import AddSubForm from './components/add-sub-form';
 import EditSubItem from './components/edit-sub-form';
 import { Subscription } from './types';
 
+
 function App() {
-
+  const [user] = useAuthState(auth);
   const [subscriptions, setSubs] = useState<Array<Subscription> | undefined>();
-
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState({ title: '', body: '' });
 
@@ -29,7 +32,6 @@ function App() {
   useEffect(() => {
     getAllSubs().then((subs) => setSubs(subs))
   }, []);
-
 
   return (<>
     <Toast className='toast-notify' onClose={() => setShow(false)}
@@ -48,9 +50,9 @@ function App() {
     <div className='app-body'>
       <Router>
         <Routes>
-          <Route path='/' element={<Home subscriptions={subscriptions} />} />
-          <Route path='/add' element={<AddSubForm />} />
-          <Route path='/edit-sub/:id' element={<EditSubItem subscriptions={subscriptions} />} />
+          <Route path='/' element={user ? <Home subscriptions={subscriptions} /> : <Login />} />
+          <Route path='/add' element={user ? <AddSubForm /> : <Login />} />
+          <Route path='/edit-sub/:id' element={user ? <EditSubItem subscriptions={subscriptions} /> : <Login />} />
         </Routes>
       </Router>
     </div>

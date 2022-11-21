@@ -3,7 +3,8 @@ dotenv.config()
 
 import mongoose, { connect } from 'mongoose';
 
-const uri = process.env.MONGO_URI_CLOUD_ATLAS;
+// eslint-disable-next-line no-undef
+const uri = process.env.MONGO_URI;
 
 connect(uri)
 

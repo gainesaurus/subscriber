@@ -1,0 +1,299 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SubItem Tests Should render the an empty form if no subscription is passed 1`] = `
+<div
+  className="form-cont"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <section
+      className="add-sub-header"
+    >
+      <input
+        accept="image/*"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file"
+      />
+      <div
+        className="icon-display"
+        onClick={[Function]}
+      >
+        <img
+          alt="Add Icon"
+          className="icon"
+          src="./add-image-icon.png"
+        />
+      </div>
+      <label
+        className="form-input-label"
+      >
+        $
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        onChange={[Function]}
+        type="number"
+        value={0}
+      />
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-chevron-left back-btn"
+          data-icon="chevron-left"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 384 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </a>
+    </section>
+    <div
+      className="form-body"
+    >
+      <label
+        className="form-input-label"
+      >
+        Title: 
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        onChange={[Function]}
+        type="string"
+        value="Title here"
+      />
+      <label
+        className="form-input-label"
+      >
+        First Payment: 
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        onChange={[Function]}
+        type="date"
+        value=""
+      />
+      <label
+        className="form-input-label"
+      >
+        Cycle: 
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        list="cycleData"
+        onChange={[Function]}
+        type="text"
+        value="Choose Cycle"
+      />
+      <datalist
+        id="cycleData"
+      >
+        <option
+          value="Monthly"
+        />
+        <option
+          value="Annually"
+        />
+      </datalist>
+      <label
+        className="form-input-label"
+      >
+        Remind Me: 
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        min="2022-12-21T19:00:00.000Z"
+        onChange={[Function]}
+        type="datetime-local"
+        value=""
+      />
+      <section>
+        <button
+          className="submit-form-btn"
+          onClick={[Function]}
+          type="button"
+        >
+          Delete Subscription
+        </button>
+        <button
+          className="submit-form-btn"
+          type="submit"
+        >
+          Edit Subscription
+        </button>
+      </section>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`SubItem Tests Should render the filled form if no subscription is passed 1`] = `
+<div
+  className="form-cont"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <section
+      className="add-sub-header"
+    >
+      <input
+        accept="image/*"
+        multiple={false}
+        onChange={[Function]}
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+        type="file"
+      />
+      <div
+        className="icon-display"
+        onClick={[Function]}
+      >
+        <img
+          alt="Add Icon"
+          className="icon"
+          src="https://cdn.icon-icons.com/icons2/3053/PNG/512/netflix_macos_bigsur_icon_189917.png"
+        />
+      </div>
+      <label
+        className="form-input-label"
+      >
+        $
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        onChange={[Function]}
+        type="number"
+        value={12}
+      />
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-chevron-left back-btn"
+          data-icon="chevron-left"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 384 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+      </a>
+    </section>
+    <div
+      className="form-body"
+    >
+      <label
+        className="form-input-label"
+      >
+        Title: 
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        onChange={[Function]}
+        type="string"
+        value="Netflix"
+      />
+      <label
+        className="form-input-label"
+      >
+        First Payment: 
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        onChange={[Function]}
+        type="date"
+        value={2022-11-22T01:26:29.807Z}
+      />
+      <label
+        className="form-input-label"
+      >
+        Cycle: 
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        list="cycleData"
+        onChange={[Function]}
+        type="text"
+        value="Monthly"
+      />
+      <datalist
+        id="cycleData"
+      >
+        <option
+          value="Monthly"
+        />
+        <option
+          value="Annually"
+        />
+      </datalist>
+      <label
+        className="form-input-label"
+      >
+        Remind Me: 
+      </label>
+      <input
+        className="form-input-box"
+        data-testid="form-input-box"
+        min="2022-12-21T19:00:00.000Z"
+        onChange={[Function]}
+        type="datetime-local"
+        value={2022-11-22T01:26:29.807Z}
+      />
+      <section>
+        <button
+          className="submit-form-btn"
+          onClick={[Function]}
+          type="button"
+        >
+          Delete Subscription
+        </button>
+        <button
+          className="submit-form-btn"
+          type="submit"
+        >
+          Edit Subscription
+        </button>
+      </section>
+    </div>
+  </form>
+</div>
+`;

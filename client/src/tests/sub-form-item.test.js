@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import SubFormItem from '../components/sub-form-item';
-import userEvent from '@testing-library/user-event'
 import { subItemForm } from "./mocks";
 
 describe('Sub form item tests', () => {

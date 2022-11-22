@@ -14,10 +14,6 @@ const subSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // description: {
-  //   type: String,
-  //   required: false
-  // },
   start: {
     type: Date,
     required: true

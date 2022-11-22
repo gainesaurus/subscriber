@@ -2,7 +2,6 @@
 import React from 'react';
 import { Subscription } from '../types';
 import SubForm from './sub-form';
-import { editSub } from '../api-service/api-service';
 import { useParams } from 'react-router-dom';
 
 type Props = {
@@ -16,7 +15,7 @@ function EditSubItem({ subscriptions }: Props) {
   const subscription = subscriptions.find((sub) => sub._id === id)
 
   return (<>
-    <SubForm apiServiceMethod={editSub} subscription={subscription} />
+    <SubForm subscription={subscription} />
   </>);
 }
 

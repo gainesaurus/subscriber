@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase";
-// import { useAuthState } from "react-firebase-hooks/auth";
 
 import "./Login.css";
 
@@ -9,18 +8,6 @@ import "./Login.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [user, loading] = useAuthState(auth);
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (loading) {
-  //     <p>loading ...</p>
-  //     return;
-  //   }
-  //   if (user) navigate("/");
-  // }, [user, loading]
-  // );
-
 
   return (
     <div className="login">

@@ -1,8 +1,11 @@
-import './home.css';
-import SubscriptionList from './sub-list';
-import { Link } from 'react-router-dom';
-import { Subscription } from '../types';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import Logout from './Logout';
+import SubscriptionList from './sub-list';
+import { Subscription } from '../types';
+
+import './home.css';
 
 function Home({ subscriptions }: { subscriptions?: Array<Subscription> }) {
 
@@ -27,7 +30,7 @@ function Home({ subscriptions }: { subscriptions?: Array<Subscription> }) {
         </footer>
       }
       <div className='body-cont'>
-
+        <Logout />
         <section className='body-header'>
           <h3 className='title'>My Subscriptions</h3>
           <Link to='/add'><button className='add-btn'>Add Subscription</button></Link>

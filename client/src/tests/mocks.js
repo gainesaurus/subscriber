@@ -21,3 +21,8 @@ export const mockSubItem = [
     reminderDate: new Date()
   }
 ]
+
+export const subItemForm = {
+  label: 'This is a label',
+  data: 'This is an old value'
+}

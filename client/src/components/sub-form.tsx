@@ -41,29 +41,6 @@ function SubForm({ apiServiceMethod, subscription }: Props) {
   const navigate = useNavigate();
   const imageUploader = React.useRef<HTMLInputElement>(null);
 
-  // HELPER FUNCTIONS, DO WE STILL ALL NEED THIS?
-  const convertTimeZone = async () => {
-    let timeZoneOffSet = (new Date()).getTimezoneOffset() * 60000; //off set in milliseconds
-    let convertedDate = new Date(reminderDate).getTime() - timeZoneOffSet;
-    return convertedDate;
-  }
-
-  const convertReminderToSeconds = async () => {
-    const date = new Date(reminderDate);
-    const reminderMillis = date.getTime();
-    const now = Date.now();
-    const delay = reminderMillis - now;
-    return delay;
-  }
-
-  function getDate() {
-    let timeZoneOffSet = (new Date()).getTimezoneOffset() * 60000; //off set in milliseconds
-    let localDateTime = (new Date(Date.now() - timeZoneOffSet));
-    let formatted = localDateTime.toISOString().slice(0, 16);
-    return formatted;
-  }
-  let date = getDate();
-
   const uploadImage = async () => {
     const data = new FormData()
     data.append('file', imageFile)
@@ -83,7 +60,6 @@ function SubForm({ apiServiceMethod, subscription }: Props) {
 
     let dateTime = new Date(start);
     const prettyStart = dateTime.toDateString();
-    const dateToBeReminded = await convertTimeZone();
     const imgData = await uploadImage();
 
     apiServiceMethod({
@@ -93,12 +69,12 @@ function SubForm({ apiServiceMethod, subscription }: Props) {
       start,
       prettyStart,
       cycle,
-      reminderDate: new Date(dateToBeReminded).toISOString(),
+      reminderDate: new Date(reminderDate).toISOString(),
       _id: subscription?._id,
     });
 
     if (reminderDate) {
-      const delay = await convertReminderToSeconds();
+      const delay = (new Date().getTime() - new Date(reminderDate).getTime()) / 1000
       const notification: Notification = {
         userId: '1234', //for testing purposes
         title: title,
@@ -165,7 +141,7 @@ function SubForm({ apiServiceMethod, subscription }: Props) {
             data={reminderDate}
             onChange={(e) => setReminderDate(e.target.value)}
             type='datetime-local'
-            min={date}
+            min={new Date(Date.now()).toISOString()}
           />
           <section>
             <button className='submit-form-btn' type='button' onClick={() => handleDelete()}>Delete Subscription</button>

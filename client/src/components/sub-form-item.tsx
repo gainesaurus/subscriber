@@ -7,6 +7,7 @@ function SubFormItem({ label, data, onChange, dataList, type, min, hasSection }:
       <section className='form-input'>
         <label className='form-input-label'>{label}</label>
         <input className='form-input-box'
+          data-testid="form-input-box"
           type={type}
           min={min ? min : undefined}
           list={dataList ? 'cycleData' : undefined}
@@ -22,6 +23,7 @@ function SubFormItem({ label, data, onChange, dataList, type, min, hasSection }:
       <>
         <label className='form-input-label'>{label}</label>
         <input className='form-input-box'
+          data-testid="form-input-box"
           type={type}
           min={min ? min : undefined}
           list={dataList ? 'cycleData' : undefined}

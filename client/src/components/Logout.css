@@ -2,13 +2,14 @@
   display: block;
   margin-left: auto;
   padding: 5px;
-  border-radius: 4px;
+  border-radius: 5px;
   border: 1px solid white;
   background: none;
   color: white;
-  box-shadow: 0 5px 25px -5px rgba(0,0,0,0.5);
+  cursor: pointer;
+  box-shadow: 0 5px 10px -5px rgba(0,0,0,0.5);
 }
 
 .logout-btn:active {
-  box-shadow: 0 5px 25px -5px rgba(0,0,0,0);
+  box-shadow: none;
 }

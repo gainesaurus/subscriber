@@ -5,7 +5,7 @@
   border-radius: 5px;
   height: 30vh;
   max-height: 110px;
-  margin: 20px 10px 10px 10px;
+  margin: 20px 10px 0 10px;
   padding: 10px;
 }
 
@@ -54,9 +54,16 @@
   border: 1px solid white;
   border-radius: 5px;
   color: white;
-  padding: 10px 15px 5px 5px;
+  padding: 10px;
   font-family: 'Dosis', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 17px;
   cursor: pointer;
+  box-shadow: 0 5px 10px -5px rgba(0,0,0,0.5);
+}
+
+
+
+.add-btn:active {
+  box-shadow: none;
 }

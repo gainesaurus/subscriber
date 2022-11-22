@@ -2,7 +2,7 @@ import Express, { json } from 'express';
 const app = Express();
 
 import cors from 'cors';
-import router from './router';
+import router from './router.js';
 
 app.use(cors());
 app.use(json());

@@ -21,10 +21,13 @@ function Home({ subscriptions }: { subscriptions?: Array<Subscription> }) {
 
   return (
     <>
+      <img className="logo"
+        src="https://static.wixstatic.com/media/3dbed1_4d207e42ab074aacb63f726dd28e966e~mv2.png/v1/fill/w_445,h_101,al_c,q_85,enc_auto/3dbed1_4d207e42ab074aacb63f726dd28e966e~mv2.png"
+        alt="Subscriber Logo"/>
       {count !== 0 &&
         <footer>
           <div className='header-notice'>
-            <h2 className='header-cont-title'>My monthly average subscription expenses are:</h2>
+            <h2 className='header-cont-title'>My monthly average subscription expenses:</h2>
             <h2 className='header-cont-price'>${count?.toFixed(2)}</h2>
           </div>
         </footer>

@@ -1,5 +1,5 @@
-import tokenDb from '../models/user-token-model';
-import { sendReminderToClient } from '../notify';
+import tokenDb from '../models/user-token-model.js';
+import { sendReminderToClient } from '../notify.js';
 
 export async function postSubNotification(req, res) {
   try {

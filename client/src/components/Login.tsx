@@ -12,7 +12,7 @@ function Login() {
   return (
     <div className="login">
       <div className="login-container">
-        <img className="logo"
+        <img className="login-logo"
           src="https://static.wixstatic.com/media/3dbed1_4d207e42ab074aacb63f726dd28e966e~mv2.png/v1/fill/w_445,h_101,al_c,q_85,enc_auto/3dbed1_4d207e42ab074aacb63f726dd28e966e~mv2.png"
           alt="Subscriber Logo"/>
         <input

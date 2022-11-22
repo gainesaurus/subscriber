@@ -1,4 +1,4 @@
-import { messaging } from './firebase'
+import { messaging } from './firebase.js'
 
 export const sendReminderToClient = (token, data) => {
   // Send a message to the devices corresponding to the provided token

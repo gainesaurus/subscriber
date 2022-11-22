@@ -5,14 +5,22 @@
   border-radius: 5px;
   height: 30vh;
   max-height: 110px;
-  margin: 20px 10px 0 10px;
+  margin: 20px 20px 0 20px;
   padding: 10px;
+}
+
+.logo {
+  display: flex;
+  width: 25vh;
+  justify-self: flex-start;
+  align-self: flex-start;
+  margin: 20px 0 0 20px;
 }
 
 .header-cont-title {
   max-width: 50%;
   font-weight: 300;
-  font-size: 35px;
+  font-size: 30px;
   color: blueviolet;
 }
 .header-cont-price {
@@ -22,19 +30,19 @@
   padding-left: 60px;
   align-self: center;
   color: rgb(72, 72, 244);
-
 }
 
 .body-cont {
-  margin: 10px;
+  margin: 5px 20px 0 20px;
 }
 .body-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 10px;
   height: 10vh;
+  margin-top: 10px;
 }
+
 .underline {
   height: 2%;
   border: 3px solid white;
@@ -61,8 +69,6 @@
   cursor: pointer;
   box-shadow: 0 5px 10px -5px rgba(0,0,0,0.5);
 }
-
-
 
 .add-btn:active {
   box-shadow: none;

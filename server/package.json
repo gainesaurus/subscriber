@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "an app to organize your paid subscription services",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "lint": "eslint .",

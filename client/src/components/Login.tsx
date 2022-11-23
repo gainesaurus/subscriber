@@ -13,7 +13,7 @@ function Login() {
     <div className="login">
       <div className="login-container">
         <img className="login-logo"
-          src="https://static.wixstatic.com/media/3dbed1_1b94ac97e77b405f86a9a15e17f08eeb~mv2.png/v1/fill/w_637,h_167,al_c,lg_1,q_85,enc_auto/3dbed1_1b94ac97e77b405f86a9a15e17f08eeb~mv2.png"
+          src="https://static.wixstatic.com/media/3dbed1_c21e470da4924ae2abf0fa851a4464e0~mv2.png/v1/fill/w_499,h_108,al_c,q_85,enc_auto/3dbed1_c21e470da4924ae2abf0fa851a4464e0~mv2.png"
           alt="Subscriber Logo"/>
         <input
           type="text"

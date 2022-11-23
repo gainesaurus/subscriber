@@ -9,6 +9,7 @@
 .login-container {
   display: flex;
   flex-direction: column;
+  max-width: 400px;
   text-align: center;
   background-color: #dcdcdc;
   padding: 30px;
@@ -18,7 +19,6 @@
 .login-logo {
   display: flex;
   width: 70%;
-  margin-left: 10%;
   align-self: center;
   justify-self: center;
   margin-bottom: 1rem;

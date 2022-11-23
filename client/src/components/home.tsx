@@ -21,9 +21,13 @@ function Home({ subscriptions }: { subscriptions?: Array<Subscription> }) {
 
   return (
     <>
-      <img className="logo"
-        src="https://static.wixstatic.com/media/3dbed1_1b94ac97e77b405f86a9a15e17f08eeb~mv2.png/v1/fill/w_637,h_167,al_c,lg_1,q_85,enc_auto/3dbed1_1b94ac97e77b405f86a9a15e17f08eeb~mv2.png"
-        alt="Subscriber Logo"/>
+      <header>
+        <img className="logo"
+          src="https://static.wixstatic.com/media/3dbed1_c21e470da4924ae2abf0fa851a4464e0~mv2.png/v1/fill/w_499,h_108,al_c,q_85,enc_auto/3dbed1_c21e470da4924ae2abf0fa851a4464e0~mv2.png"
+          alt="Subscriber Logo"
+        />
+        <Logout />
+      </header>
       {count !== 0 &&
         <footer>
           <div className='header-notice'>
@@ -33,7 +37,6 @@ function Home({ subscriptions }: { subscriptions?: Array<Subscription> }) {
         </footer>
       }
       <div className='body-cont'>
-        <Logout />
         <section className='body-header'>
           <h3 className='title'>My Subscriptions</h3>
           <Link to='/add'><button className='add-btn'>Add Subscription</button></Link>

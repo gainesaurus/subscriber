@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { onMessageListener } from './firebase';
 import { auth } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -20,6 +20,7 @@ import { Subscription } from './types';
 
 function App() {
   const [user] = useAuthState(auth);
+  console.log(user)
   const [subscriptions, setSubs] = useState<Subscription[] | undefined>();
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState({ title: '', body: '' });

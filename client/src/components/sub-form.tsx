@@ -91,7 +91,7 @@ function SubForm({ subscription }: Props) {
 
   return (
     <div className='form-cont'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-inputs">
         <section className='add-sub-header'>
           <input
             type='file'

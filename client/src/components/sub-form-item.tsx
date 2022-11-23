@@ -14,12 +14,8 @@ function SubFormItem({ label, data, onChange, dataList, type, min, hasSection }:
           value={data}
           onChange={onChange}
         />
-        {dataList ?
-          <datalist id='cycleData'>
-            <option value='Monthly' />
-            <option value='Annually' />
-          </datalist> : null}
-      </section> :
+      </section>
+      :
       <>
         <label className='form-input-label'>{label}</label>
         <input className='form-input-box'
@@ -27,14 +23,9 @@ function SubFormItem({ label, data, onChange, dataList, type, min, hasSection }:
           type={type}
           min={min ? min : undefined}
           list={dataList ? 'cycleData' : undefined}
-          value={data}
+          value={data ? data : undefined}
           onChange={onChange}
         />
-        {dataList ?
-          <datalist id='cycleData'>
-            <option value='Monthly' />
-            <option value='Annually' />
-          </datalist> : null}
       </>
     }
   </>
@@ -43,7 +34,7 @@ function SubFormItem({ label, data, onChange, dataList, type, min, hasSection }:
 
 type Props = {
   label: string;
-  data: string | number;
+  data?: string | number;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   dataList?: boolean;
   type: string;

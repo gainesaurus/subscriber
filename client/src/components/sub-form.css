@@ -14,20 +14,17 @@
 .add-sub-header {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  margin-right: 35px;
 }
 
 .icon-display {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  height: 8rem;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  margin: 20px;
-  /* border: 2px solid #fcbebe; */
   cursor: pointer;
 }
 
@@ -40,8 +37,18 @@
 .back-btn {
   position: absolute;
   color: blueviolet;
-  top: 15px;
-  right: -10px;
+  top: 1rem;
+  right: 1rem;
+}
+
+.cycle-select {
+  border: none;
+  border-radius: 5px;
+  margin-top: 0.2rem;
+  padding: 0.1rem;
+  font-family: 'Dosis', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .form-body {
@@ -56,11 +63,11 @@
   border: 1.5px solid rgb(121, 28, 227);
   border-radius: 5px;
   color: rgb(121, 28, 227);
-  margin: 20px 20px 20px 0px;
-  padding: 10px;
+  margin: 2rem;
+  padding: 0.7rem;
   font-family: 'Dosis', sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
   box-shadow: 0 5px 10px -5px rgba(0,0,0,0.5);
 }

@@ -52,6 +52,7 @@ function App() {
           <Route path='/' element={user ? <Home subscriptions={subscriptions} /> : <Login />} />
           <Route path='/add' element={user ? <AddSubForm /> : <Login />} />
           <Route path='/edit-sub/:id' element={user ? <EditSubItem subscriptions={subscriptions} /> : <Login />} />
+          {/* <Route path='/register' element={<Register />} /> */}
         </Routes>
       </Router>
     </div>

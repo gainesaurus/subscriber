@@ -24,9 +24,9 @@ function SubForm({ subscription }: Props) {
     initialState = {
       icon: './add-image-icon.png',
       price: 0,
-      title: 'Title here',
+      title: '',
       start: '',
-      cycle: 'Choose Cycle',
+      cycle: '',
       reminderDate: '',
       prettyStart: '',
     };
@@ -105,12 +105,22 @@ function SubForm({ subscription }: Props) {
           <div className='icon-display' onClick={() => { if (imageUploader.current) { imageUploader.current.click() } }}>
             <img className='icon' src={sub.icon} alt='Add Icon' />
           </div>
-          <SubFormItem
-            label='$'
-            data={sub.price}
-            onChange={(e) => setSub({ ...sub, price: parseInt(e.target.value) })}
-            type='number'
-            hasSection={false} />
+          <div className='payment-info'>
+            <SubFormItem
+              label='Price:'
+              data={sub.price}
+              onChange={(e) => setSub({ ...sub, price: parseInt(e.target.value) })}
+              type='number'
+              hasSection={false}
+            />
+            <select
+              className='cycle-select' name="cycle"
+              onChange={(e) => setSub({ ...sub, cycle: e.target.value })}
+            >
+              <option value="monthly">monthly</option>
+              <option value="annually">annually</option>
+            </select>
+          </div>
           <Link to='/'><FontAwesomeIcon icon={faChevronLeft} className='back-btn' /></Link>
         </section>
 
@@ -120,18 +130,14 @@ function SubForm({ subscription }: Props) {
             label='Title: '
             data={sub.title}
             onChange={(e) => setSub({ ...sub, title: e.target.value })}
-            type='string' />
+            type='string'
+          />
           <SubFormItem
             label='First Payment: '
             data={new Date(sub.start).toLocaleDateString('en-ca')}
             onChange={(e) => setSub({ ...sub, start: e.target.value })}
-            type='date' />
-          <SubFormItem
-            label='Cycle: '
-            data={sub.cycle}
-            onChange={(e) => setSub({ ...sub, cycle: e.target.value })}
-            dataList={true}
-            type='text' />
+            type='date'
+          />
           <SubFormItem
             label='Remind Me: '
             data={sub.reminderDate.slice(0, -8)}

@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 35px;
+  /* margin-right: 35px; */
 }
 
 .icon-display {
@@ -27,7 +27,6 @@
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   margin: 20px;
-  /* border: 2px solid #fcbebe; */
   cursor: pointer;
 }
 
@@ -40,8 +39,6 @@
 .back-btn {
   position: absolute;
   color: blueviolet;
-  top: 15px;
-  right: -10px;
 }
 
 .form-body {
@@ -61,14 +58,13 @@
 
 .form-input-label {
   font-size: 20px;
-  margin-right: 15px;
 }
+
 .form-input-box {
   color:blue;
   border: none;
   border-radius: 5px;
   padding: 10px;
-  margin-right: 20px;
   width: 75%;
 }
 .submit-form-btn {

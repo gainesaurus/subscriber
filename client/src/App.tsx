@@ -19,13 +19,12 @@ import { Subscription } from './types';
 
 function App() {
   const [user] = useAuthState(auth);
-  const [subscriptions, setSubs] = useState<Array<Subscription> | undefined>();
+  const [subscriptions, setSubs] = useState<Subscription[] | undefined>();
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState({ title: '', body: '' });
 
   onMessageListener().then((payload: any) => {
     setShow(true);
-    console.log('Received foreground message ', payload);
     setNotification({ title: payload.data.title, body: payload.data.body });
   }).catch((err) => { console.log('Error in onMessageListener', err) })
 

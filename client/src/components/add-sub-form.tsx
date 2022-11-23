@@ -4,9 +4,11 @@ import 'react-datalist-input/dist/styles.css';
 import SubForm from './sub-form';
 
 function AddSubForm() {
-  return (<>
-    <SubForm />
-  </>);
+  return (
+    <>
+      <SubForm />
+    </>
+  );
 }
 
 export default AddSubForm;

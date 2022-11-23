@@ -11,7 +11,8 @@ type Props = {
 function EditSubItem({ subscriptions }: Props) {
   const { id } = useParams();
 
-  if (!subscriptions) return <></>
+  if (!subscriptions) return null;
+  
   const subscription = subscriptions.find((sub) => sub._id === id)
 
   return (<>

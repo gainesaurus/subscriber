@@ -1,7 +1,8 @@
+import { Request, Response } from 'express';
 import tokenDb from '../models/user-token-model.js';
 import { sendReminderToClient } from '../notify.js';
 
-export async function postSubNotification(req, res) {
+export async function postSubNotification(req:Request, res:Response) {
   try {
     const notifyInfo = req.body;
 

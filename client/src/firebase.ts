@@ -18,6 +18,7 @@ import {
 } from 'firebase/firestore';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
+
 // Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -73,8 +74,10 @@ const registerWithEmailAndPassword = async (name:string, email:string, password:
       authProvider: 'local',
       email,
     });
+    alert('User created!');
   } catch (error) {
     console.error(error);
+    alert('Invalid email or password');
   }
 }
 

@@ -1,6 +1,7 @@
+import { Request, Response } from 'express';
 import db from '../models/user-token-model.js'
 
-export async function putToken(req, res) {
+export async function putToken(req:Request, res:Response) {
   try {
     const tokenObj = req.body;
     console.log(tokenObj);

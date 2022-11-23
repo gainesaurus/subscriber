@@ -1,6 +1,7 @@
+import { Request, Response } from 'express';
 import db from '../models/sub-model.js';
 
-export async function getAllSubs(req, res) {
+export async function getAllSubs(req:Request, res:Response) {
   try {
     const subscriptions = await db.find().sort({ reminderDate: -1 });
     res.send(subscriptions);
@@ -12,7 +13,7 @@ export async function getAllSubs(req, res) {
   }
 }
 
-export async function postOneSub(req, res) {
+export async function postOneSub(req:Request, res:Response) {
   try {
     const sub = req.body;
     const createdSub = await db.create({
@@ -33,7 +34,7 @@ export async function postOneSub(req, res) {
   }
 }
 
-export async function editSub(req, res) {
+export async function editSub(req:Request, res:Response) {
   try {
     const updates = req.body;
     console.log(req.body);
@@ -57,7 +58,7 @@ export async function editSub(req, res) {
   }
 }
 
-export async function deleteSub(req, res) {
+export async function deleteSub(req:Request, res:Response) {
   try {
     const subId = req.body.id;
     await db.findOneAndDelete({ _id: subId });

@@ -33,17 +33,17 @@ function SubForm({ subscription }: Props) {
     apiServiceMethod = postNewSub
   }
 
-  const [imageFile, setImageFile] = useState('');
+  const [imageFile, setImageFile] = useState<File | undefined>();
   const [sub, setSub] = useState(initialState)
   const navigate = useNavigate();
   const imageUploader = React.useRef<HTMLInputElement>(null);
 
   const uploadImage = async () => {
     const data = new FormData()
-    data.append('file', imageFile)
-    data.append('upload_preset', 'subscription-icon')
-    data.append('cloud_name', 'dovw0n8pd')
-    let imgData = await fetch('https://api.cloudinary.com/v1_1/dovw0n8pd/image/upload', {
+    data.append('file', imageFile || '')
+    data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_PRESET || '')
+    data.append('cloud_name', process.env.REACT_APP_CLOUDINARY_CLOUD_NAME || '')
+    let imgData = await fetch(process.env.REACT_APP_CLOUDINARY_URL || '', {
       method: 'POST',
       body: data
     })
@@ -97,7 +97,7 @@ function SubForm({ subscription }: Props) {
             multiple={false}
             onChange={(e) => {
               setSub({ ...sub, icon: URL.createObjectURL(e.target.files![0]) });
-              setImageFile(e.target.files![0].name);
+              setImageFile(e.target.files![0]);
             }}
             ref={imageUploader}
             style={{ display: 'none' }}
@@ -123,7 +123,7 @@ function SubForm({ subscription }: Props) {
             type='string' />
           <SubFormItem
             label='First Payment: '
-            data={sub.start}
+            data={new Date(sub.start).toLocaleDateString('en-ca')}
             onChange={(e) => setSub({ ...sub, start: e.target.value })}
             type='date' />
           <SubFormItem
@@ -134,10 +134,10 @@ function SubForm({ subscription }: Props) {
             type='text' />
           <SubFormItem
             label='Remind Me: '
-            data={sub.reminderDate}
-            onChange={(e) => setSub({ ...sub, reminderDate: e.target.value })}
+            data={sub.reminderDate.slice(0, -8)}
+            onChange={(e) => setSub({ ...sub, reminderDate: new Date(e.target.value).toISOString() })}
             type='datetime-local'
-            min={new Date(Date.now()).toISOString()}
+            min={new Date().toISOString().slice(0, -8)}
           />
           <section>
             {subscription ? <button className='submit-form-btn' type='button' onClick={() => handleDelete()}>Delete Subscription</button> : null}

@@ -11,7 +11,7 @@ export type Subscription = {
 }
 
 export type Notification = {
-  userId: string;
+  token: string;
   title: string;
   price: number;
   delay: number;

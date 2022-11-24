@@ -37,9 +37,7 @@ export async function postOneSub(req:Request, res:Response) {
 export async function editSub(req:Request, res:Response) {
   try {
     const updates = req.body;
-    console.log(req.body);
-
-    const query = { _id: updates.id };
+    const query = { _id: updates._id };
     const updatedSub = await db.findOneAndUpdate(query, {
       icon: updates.icon,
       price: updates.price,

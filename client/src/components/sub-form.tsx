@@ -6,6 +6,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Notification, Subscription } from '../types';
 import { postSubNotification, deleteSub, editSub, postNewSub } from '../api-service/api-service';
 import SubFormItem from './sub-form-item';
+import { getMessageToken } from '../firebase';
 
 type Props = {
   subscription?: Subscription
@@ -26,7 +27,7 @@ function SubForm({ subscription }: Props) {
       price: 0,
       title: '',
       start: '',
-      cycle: '',
+      cycle: 'Monthly',
       category: '',
       reminderDate: '',
       prettyStart: '',
@@ -57,10 +58,11 @@ function SubForm({ subscription }: Props) {
 
     let dateTime = new Date(sub.start);
     const prettyStart = dateTime.toDateString();
-    const imgData = await uploadImage();
+    let icon = sub.icon;
+    if (imageFile) icon = (await uploadImage()).url;
 
     apiServiceMethod({
-      icon: imgData.url,
+      icon,
       price: sub.price,
       title: sub.title,
       category: sub.category,
@@ -72,9 +74,10 @@ function SubForm({ subscription }: Props) {
     });
 
     if (sub.reminderDate) {
-      const delay = (new Date().getTime() - new Date(sub.reminderDate).getTime()) / 1000
+      const delay = (new Date(sub.reminderDate).getTime() - new Date().getTime())
+      const token = await getMessageToken() || ''
       const notification: Notification = {
-        userId: '1234', //for testing purposes
+        token,
         title: sub.title,
         price: sub.price,
         delay: delay,
@@ -119,8 +122,8 @@ function SubForm({ subscription }: Props) {
               className='cycle-select' name="cycle"
               onChange={(e) => setSub({ ...sub, cycle: e.target.value })}
             >
-              <option value="monthly">monthly</option>
-              <option value="annually">annually</option>
+              <option value="Monthly">Monthly</option>
+              <option value="Annually">Annually</option>
             </select>
           </div>
           <Link to='/'><FontAwesomeIcon icon={faChevronLeft} className='back-btn' /></Link>

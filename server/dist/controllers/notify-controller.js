@@ -34,41 +34,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import tokenDb from '../models/user-token-model.js';
 import { sendReminderToClient } from '../notify.js';
 export function postSubNotification(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var notifyInfo, userToken_1, messageData_1, delay, err_1;
+        var notifyInfo, userToken_1, messageData_1, delay;
         var _this = this;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    notifyInfo = req.body;
-                    return [4 /*yield*/, tokenDb.findOne({ userId: notifyInfo.userId })];
-                case 1:
-                    userToken_1 = _a.sent();
-                    messageData_1 = {
-                        title: notifyInfo.title,
-                        body: "you are about to be billed $".concat(notifyInfo.price, " from ").concat(notifyInfo.title, "!")
-                    };
-                    delay = notifyInfo.delay;
-                    console.log(delay);
-                    setTimeout(function () { return __awaiter(_this, void 0, void 0, function () {
-                        return __generator(this, function (_a) {
-                            sendReminderToClient(userToken_1.token, messageData_1);
-                            return [2 /*return*/];
-                        });
-                    }); }, delay);
-                    res.sendStatus(201);
-                    return [3 /*break*/, 3];
-                case 2:
-                    err_1 = _a.sent();
-                    console.log('ERROR in NOTIFY controller POST from db', err_1);
-                    res.status(500);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+            try {
+                notifyInfo = req.body;
+                userToken_1 = notifyInfo.token;
+                messageData_1 = {
+                    title: notifyInfo.title,
+                    body: "you are about to be billed $".concat(notifyInfo.price, " from ").concat(notifyInfo.title, "!")
+                };
+                delay = notifyInfo.delay;
+                console.log(delay);
+                console.log(userToken_1);
+                setTimeout(function () { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        sendReminderToClient(userToken_1, messageData_1);
+                        return [2 /*return*/];
+                    });
+                }); }, delay);
+                res.sendStatus(201);
             }
+            catch (err) {
+                console.log('ERROR in NOTIFY controller POST from db', err);
+                res.status(500);
+            }
+            return [2 /*return*/];
         });
     });
 }

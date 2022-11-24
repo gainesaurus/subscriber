@@ -72,7 +72,7 @@ function SubForm({ subscription }: Props) {
     });
 
     if (sub.reminderDate) {
-      const delay = (new Date(sub.reminderDate).getTime() - new Date().getTime()) / 1000
+      const delay = (new Date(sub.reminderDate).getTime() - new Date().getTime())
       const token = await getMessageToken() || ''
       const notification: Notification = {
         token,

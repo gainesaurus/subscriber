@@ -52,7 +52,7 @@ export function postSubNotification(req, res) {
                 console.log(userToken_1);
                 setTimeout(function () { return __awaiter(_this, void 0, void 0, function () {
                     return __generator(this, function (_a) {
-                        sendReminderToClient(userToken_1.token, messageData_1);
+                        sendReminderToClient(userToken_1, messageData_1);
                         return [2 /*return*/];
                     });
                 }); }, delay);

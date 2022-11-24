@@ -111,7 +111,6 @@ export function editSub(req, res) {
                 case 1:
                     updatedSub = _a.sent();
                     res.status(201);
-                    console.log(updatedSub);
                     res.send(updatedSub);
                     return [3 /*break*/, 3];
                 case 2:

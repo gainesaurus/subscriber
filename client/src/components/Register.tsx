@@ -14,7 +14,7 @@ function Register() {
       <div className="login-container">
         <img className="login-logo"
           src="https://static.wixstatic.com/media/3dbed1_c21e470da4924ae2abf0fa851a4464e0~mv2.png/v1/fill/w_499,h_108,al_c,q_85,enc_auto/3dbed1_c21e470da4924ae2abf0fa851a4464e0~mv2.png"
-          alt="Subscriber Logo"/>
+          alt="Subscriber Logo" />
         <input
           type="text"
           className="login-textBox"
@@ -31,7 +31,7 @@ function Register() {
         />
         <button
           className="login-btn"
-          onClick={() => registerWithEmailAndPassword(auth, email, password)}
+        // onClick={() => registerWithEmailAndPassword(auth, email, password)}
         >
           Register
         </button>

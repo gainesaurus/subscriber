@@ -16,7 +16,7 @@ export async function postSubNotification(req:Request, res:Response) {
     console.log(userToken);
 
     setTimeout(async () => {
-      sendReminderToClient(userToken!.token, messageData);
+      sendReminderToClient(userToken, messageData);
     }, delay);
 
     res.sendStatus(201);

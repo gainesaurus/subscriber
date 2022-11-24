@@ -31,7 +31,7 @@ function Register() {
         />
         <button
           className="login-btn"
-        // onClick={() => registerWithEmailAndPassword(auth, email, password)}
+          onClick={() => registerWithEmailAndPassword(auth, email, password)}
         >
           Register
         </button>

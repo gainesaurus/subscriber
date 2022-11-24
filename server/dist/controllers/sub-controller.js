@@ -98,8 +98,7 @@ export function editSub(req, res) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     updates = req.body;
-                    console.log(req.body);
-                    query = { _id: updates.id };
+                    query = { _id: updates._id };
                     return [4 /*yield*/, db.findOneAndUpdate(query, {
                             icon: updates.icon,
                             price: updates.price,
@@ -112,6 +111,7 @@ export function editSub(req, res) {
                 case 1:
                     updatedSub = _a.sent();
                     res.status(201);
+                    console.log(updatedSub);
                     res.send(updatedSub);
                     return [3 /*break*/, 3];
                 case 2:

@@ -28,7 +28,7 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
-
+console.log(firebaseConfig.messagingSenderId)
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 const auth = getAuth(firebase);
@@ -85,8 +85,9 @@ const logout = () => {
 
 export const getMessageToken = async () => {
   if ('serviceWorker' in navigator) {
-    let registration = await navigator.serviceWorker.register('./sw.js');
-
+    console.log('before service worker registration')
+    let registration = await navigator.serviceWorker.register('../sw.js');
+    console.log(registration)
     const token = await getToken(messaging, {
       serviceWorkerRegistration: registration,
       vapidKey: process.env.REACT_APP_FIREBASE_PUBLIC_VAPID_KEY,

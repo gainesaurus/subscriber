@@ -28,6 +28,7 @@ function SubForm({ subscription }: Props) {
       title: '',
       start: '',
       cycle: 'Monthly',
+      category: '',
       reminderDate: '',
       prettyStart: '',
     };
@@ -64,6 +65,7 @@ function SubForm({ subscription }: Props) {
       icon,
       price: sub.price,
       title: sub.title,
+      category: sub.category,
       start: sub.start,
       prettyStart,
       cycle: sub.cycle,
@@ -92,7 +94,7 @@ function SubForm({ subscription }: Props) {
 
   return (
     <div className='form-cont'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-inputs">
         <section className='add-sub-header'>
           <input
             type='file'
@@ -135,6 +137,18 @@ function SubForm({ subscription }: Props) {
             onChange={(e) => setSub({ ...sub, title: e.target.value })}
             type='string'
           />
+          <label className='input-label'>Category:</label>
+          <select
+            className='category-select' name="category"
+            onChange={(e) => setSub({ ...sub, category: e.target.value })}
+          >
+            <option value="entertainment">entertainment</option>
+            <option value="education">education</option>
+            <option value="work">work</option>
+            <option value="home">home</option>
+            <option value="food">food</option>
+            <option value="other">other</option>
+          </select>
           <SubFormItem
             label='First Payment: '
             data={new Date(sub.start).toLocaleDateString('en-ca')}

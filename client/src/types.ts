@@ -3,6 +3,7 @@ export type Subscription = {
   icon:string;
   price: number;
   title: string;
+  category: string;
   start: string;
   prettyStart:string;
   cycle: string;

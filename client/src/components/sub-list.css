@@ -6,6 +6,16 @@
   padding: 15px;
   overflow-y: scroll;
 }
+
 .list-cont::-webkit-scrollbar {
   display: none;
+}
+
+.category-filter {
+  display:flex;
+  width: 20%;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
 }

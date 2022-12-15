@@ -1,6 +1,6 @@
 # Subscriber - manage your subscriptions, never get accidentally billed!
 
-Welcome to Subscriber, my person project and the app that makes it easy to organize your active subscriptions and free trials. 
+Welcome to Subscriber, an app that makes it easy to organize your active subscriptions and free trials. 
 
 ## Screenshots
 
